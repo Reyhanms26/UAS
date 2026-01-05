@@ -133,17 +133,11 @@ input[type="time"] {
   #titleInput { grid-column:1; }
   #descInput  { grid-column:2; }
 
-  /* baris 2 → 3 kolom */
-  #dateInput {
-    grid-column:1;
-  }
-
-  #timeInput {
-    grid-column:2;
-  }
-
+  #dateInput { grid-column:1; }
+  #timeInput { grid-column:2; }
   #addBtn {
-    grid-column:3;
+    grid-column:1 / -1;
+    padding:12px;
   }
 
   /* bikin baris 2 jadi 3 kolom */
