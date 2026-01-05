@@ -177,6 +177,61 @@
             transform: translateY(0px);
         }
         }
+        /* ========================= */
+/* RESPONSIVE MOBILE (HP) */
+/* ========================= */
+@media (max-width: 768px) {
+
+  /* Container card: 2 kolom */
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+
+  /* Ukuran kartu sedikit diperkecil biar muat */
+  .kartu {
+    width: 160px;
+    height: 230px;
+  }
+
+  /* Judul section (WORK, PERSONAL, EDUCATION) */
+  .word2 {
+    margin-top: 80px;
+    font-size: 26px;
+    width: 200px;
+  }
+
+  /* ====== TEXT DI DALAM CARD JADI TENGAH ====== */
+  .back-content strong,
+  .front-content strong {
+    text-align: center;
+    display: block;
+  }
+
+  .title {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .title p {
+    width: 100%;
+    text-align: center;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  .card-footer {
+    text-align: center;
+  }
+  .card-container > .kartu:last-child {
+    grid-column: span 2;
+  }
+}
+
     </style>
 
     <link rel="stylesheet" href="style.css">
