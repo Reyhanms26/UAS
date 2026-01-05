@@ -1,384 +1,354 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todo App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-* { box-sizing: border-box; }
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      transition: .3s;
+    }
+    body.light { background:#d9dff0; color:#111; }
+    body.dark  { background:#1c253a; color:#f8fafc; }
+    body.light .top-bar { background:#d9dff0; }
+    body.dark  .top-bar { background:#1c253a; }
 
-body {
-  font-family: Arial, sans-serif;
-  padding: 40px;
-  transition: .3s;
-}
+    .top-bar {
+      position: fixed;
+      top:0; left:0;
+      width:100%;
+      padding:10px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+    }
 
-body.light { background:#d9dff0; color:#111; }
-body.dark  { background:#1c253a; color:#f8fafc; }
+    .clock-box {
+      padding:8px 12px;
+      border-radius:10px;
+      background:#ffffff;
+      box-shadow:0 4px 10px rgba(0,0,0,.15);
+    }
+    body.dark .clock-box { background:#2a3550; }
+    .clock { font-size:16px; font-weight:600; }
+    #modeText { font-size:11px; opacity:.8; }
 
-/* ================= TOP BAR ================= */
-.top-bar {
-  position: fixed;
-  top:0; left:0;
-  width:100%;
-  padding:10px 14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:1000;
-}
+    .dropdown .btn { background:#ffffff; }
+    body.dark .dropdown .btn { background:#2a3550; }
 
-body.light .top-bar { background:#d9dff0; }
-body.dark  .top-bar { background:#1c253a; }
+    .foto { width:24px; }
 
-.clock-box {
-  padding:8px 12px;
-  border-radius:10px;
-  background:#ffffff;
-  box-shadow:0 4px 10px rgba(0,0,0,.15);
-}
+    .title { text-align:center; margin-bottom:25px; }
 
-body.dark .clock-box { background:#2a3550; }
+    .input {
+      border-radius:10px;
+      padding:10px;
+    }
+    .input1 {
+      border-radius:10px;
+      background:black;
+      color:white;
+      padding:10px 14px;
+    }
+    input[type="date"],
+    input[type="time"] {
+      color:#000;
+    }
 
-.clock { font-size:16px; font-weight:600; }
-#modeText { font-size:11px; opacity:.8; }
+    .filter {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:30px;
+    }
+    .filter-label {
+      font-size:14px;
+      opacity:.8;
+    }
 
-.dropdown .btn { background:#ffffff; }
-body.dark .dropdown .btn { background:#2a3550; }
+    .todo-form {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:25px;
+    }
+    .todo-container {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+    .todo-card {
+      background:white;
+      padding:20px;
+      border-radius:12px;
+    }
+    .todo-card,
+    .todo-card h4,
+    .todo-card small,
+    .todo-card p,
+    .todo-card span {
+      color: #000 !important;
+    }
+    .todo-card.done {
+      opacity: 0.6;
+    }
+    .todo-card.done h4,
+    .todo-card.done small {
+      text-decoration: line-through;
+    }
 
-.foto { width:24px; }
+    @media (max-width:768px) {
 
-/* ================= CONTENT ================= */
-.title { text-align:center; margin-bottom:25px; }
+      body { padding:20px; }
 
-.input {
-  border-radius:10px;
-  padding:10px;
-}
+      .todo-form {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:auto auto;
+        gap:12px;
+        margin-bottom:22px;
+      }
 
-.input1 {
-  border-radius:10px;
-  background:black;
-  color:white;
-  padding:10px 14px;
-}
+      #titleInput { grid-column:1; }
+      #descInput  { grid-column:2; }
+      #dateInput { grid-column:1; }
+      #timeInput { grid-column:2; }
+      #addBtn {
+        grid-column:1 / -1;
+        padding:12px;
+      }
 
-input[type="date"],
-input[type="time"] {
-  color:#000;
-}
+      .todo-form {
+        grid-template-columns:1fr 1fr auto;
+      }
 
-/* ================= FORM ================= */
-.todo-form {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:25px;
-}
+      #addBtn {
+        padding:12px 16px;
+        font-size:15px;
+      }
 
-/* ================= FILTER ================= */
-.filter {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:30px;
-}
+      .filter {
+        display:grid;
+        grid-template-columns:auto 1fr auto;
+        gap:8px;
+        align-items:center;
+        margin-bottom:25px;
+      }
+      .filter-label {
+        font-size:12px;
+      }
+      .filter input {
+        font-size:13px;
+        padding:8px;
+      }
+      .filter button {
+        font-size:13px;
+        padding:8px 12px;
+      }
 
-.filter-label {
-  font-size:14px;
-  opacity:.8;
-}
-
-/* ================= TODO ================= */
-.todo-container {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
-.todo-card {
-  background:white;
-  padding:20px;
-  border-radius:12px;
-}
-
-/* ===== FORCE TEXT TODO CARD ALWAYS BLACK ===== */
-.todo-card,
-.todo-card h4,
-.todo-card small,
-.todo-card p,
-.todo-card span {
-  color: #000 !important;
-}
-
-/* ===== TODO DONE STYLE ===== */
-.todo-card.done {
-  opacity: 0.6;
-}
-
-.todo-card.done h4,
-.todo-card.done small {
-  text-decoration: line-through;
-}
-
-/* ================= MOBILE ================= */
-@media (max-width:768px) {
-
-  body { padding:20px; }
-
-  /* ===== FORM GRID ===== */
-  .todo-form {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:auto auto;
-    gap:12px;
-    margin-bottom:22px;
-  }
-
-  /* baris 1 */
-  #titleInput { grid-column:1; }
-  #descInput  { grid-column:2; }
-
-  #dateInput { grid-column:1; }
-  #timeInput { grid-column:2; }
-  #addBtn {
-    grid-column:1 / -1;
-    padding:12px;
-  }
-
-  /* bikin baris 2 jadi 3 kolom */
-  .todo-form {
-    grid-template-columns:1fr 1fr auto;
-  }
-
-  #addBtn {
-    padding:12px 16px;
-    font-size:15px;
-  }
-
-  /* ===== FILTER (KECIL) ===== */
-  .filter {
-    display:grid;
-    grid-template-columns:auto 1fr auto;
-    gap:8px;
-    align-items:center;
-    margin-bottom:25px;
-  }
-
-  .filter-label {
-    font-size:12px;
-  }
-
-  .filter input {
-    font-size:13px;
-    padding:8px;
-  }
-
-  .filter button {
-    font-size:13px;
-    padding:8px 12px;
-  }
-
-  .todo-container {
-    grid-template-columns:1fr;
-  }
-}
-</style>
+      .todo-container {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <content>
+    <div class="top-bar">
+      <div class="clock-box">
+        <div id="clock" class="clock"></div>
+        <div id="modeText"></div>
+      </div>
 
-<div class="top-bar">
-  <div class="clock-box">
-    <div id="clock" class="clock"></div>
-    <div id="modeText"></div>
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" data-bs-toggle="dropdown">
+          <img src="media/foto2.png" class="foto">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="index.html">Home</a></li>
+          <li><a class="dropdown-item" href="galery.html">Gallery</a></li>
+          <li><a class="dropdown-item" href="about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="title"><br><br>To Do List</h2>
+  </content>
+
+  <form>
+    <div class="todo-form">
+      <input id="titleInput" placeholder="Title" class="input">
+      <input id="descInput" placeholder="Note" class="input">
+      <input type="date" id="dateInput" class="input">
+      <input type="time" id="timeInput" class="input">
+      <button id="addBtn" class="input1">Add</button>
+    </div>
+  </form>
+
+  <div class="filter">
+    <span class="filter-label">Date Filter</span>
+    <input type="date" id="filterDate" class="input">
+    <button id="resetFilter" class="input1">Reset</button>
   </div>
 
-  <div class="dropdown">
-    <button class="btn dropdown-toggle" data-bs-toggle="dropdown">
-      <img src="media/foto2.png" class="foto">
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end">
-      <li><a class="dropdown-item" href="#">Home</a></li>
-      <li><a class="dropdown-item" href="#">About</a></li>
-    </ul>
-  </div>
-</div>
+  <div class="todo-container" id="todoContainer"></div>
 
-<h2 class="title"><br><br>To Do List</h2>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText =
+        now.toLocaleTimeString("id-ID");
+      setGreetingAndMode(now.getHours());
+    }
 
-<!-- FORM -->
-<div class="todo-form">
-  <input id="titleInput" placeholder="Title" class="input">
-  <input id="descInput" placeholder="Note" class="input">
-  <input type="date" id="dateInput" class="input">
-  <input type="time" id="timeInput" class="input">
-  <button id="addBtn" class="input1">Add</button>
-</div>
+    function setGreetingAndMode(hour) {
+      const body = document.body;
+      const modeText = document.getElementById("modeText");
 
-<!-- FILTER -->
-<div class="filter">
-  <span class="filter-label">Filter date</span>
-  <input type="date" id="filterDate" class="input">
-  <button id="resetFilter" class="input1">Reset</button>
-</div>
+      if (hour >= 6 && hour < 18) {
+        body.className = "light";
+        modeText.innerText = "Day Mode ☀️";
+      } else {
+        body.className = "dark";
+        modeText.innerText = "Night Mode 🌙";
+      }
+    }
 
-<div class="todo-container" id="todoContainer"></div>
+    setInterval(updateClock, 1000);
+    updateClock();
 
-<script>
-/* ===== CLOCK + MODE ===== */
-function updateClock() {
-  const now = new Date();
-  document.getElementById("clock").innerText =
-    now.toLocaleTimeString("id-ID");
-  setGreetingAndMode(now.getHours());
-}
+    const titleInput = document.getElementById("titleInput");
+    const descInput = document.getElementById("descInput");
+    const dateInput = document.getElementById("dateInput");
+    const timeInput = document.getElementById("timeInput");
+    const addBtn = document.getElementById("addBtn");
 
-function setGreetingAndMode(hour) {
-  const body = document.body;
-  const modeText = document.getElementById("modeText");
+    const filterDate = document.getElementById("filterDate");
+    const resetFilter = document.getElementById("resetFilter");
+    const todoContainer = document.getElementById("todoContainer");
 
-  if (hour >= 6 && hour < 18) {
-    body.className = "light";
-    modeText.innerText = "Day Mode ☀️";
-  } else {
-    body.className = "dark";
-    modeText.innerText = "Night Mode 🌙";
-  }
-}
+    let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
-setInterval(updateClock, 1000);
-updateClock();
+    addBtn.addEventListener("click", () => {
+      if (
+        !titleInput.value ||
+        !descInput.value ||
+        !dateInput.value ||
+        !timeInput.value
+      ) {
+        alert("All fields are required to be filled in!");
+        return;
+      }
 
-/* ===== TODO APP ===== */
-const titleInput = document.getElementById("titleInput");
-const descInput = document.getElementById("descInput");
-const dateInput = document.getElementById("dateInput");
-const timeInput = document.getElementById("timeInput");
-const addBtn = document.getElementById("addBtn");
+      todos.push({
+        id: Date.now(),
+        title: titleInput.value,
+        desc: descInput.value,
+        date: dateInput.value,
+        time: timeInput.value,
+        done: false
+      });
 
-const filterDate = document.getElementById("filterDate");
-const resetFilter = document.getElementById("resetFilter");
-const todoContainer = document.getElementById("todoContainer");
-
-let todos = JSON.parse(localStorage.getItem("todos")) || [];
-
-addBtn.addEventListener("click", () => {
-  if (
-    !titleInput.value ||
-    !descInput.value ||
-    !dateInput.value ||
-    !timeInput.value
-  ) {
-    alert("Semua field wajib diisi!");
-    return;
-  }
-
-  todos.push({
-    id: Date.now(),
-    title: titleInput.value,
-    desc: descInput.value,
-    date: dateInput.value,
-    time: timeInput.value,
-    done: false
-  });
-
-  saveData();
-  renderTodos(todos);
-  clearInput();
-  alert("Todo berhasil ditambahkan!");
-});
-
-function clearInput() {
-  titleInput.value = "";
-  descInput.value = "";
-  dateInput.value = "";
-  timeInput.value = "";
-}
-
-function saveData() {
-  localStorage.setItem("todos", JSON.stringify(todos));
-}
-
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString("id-ID", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
-}
-
-function renderTodos(data) {
-  todoContainer.innerHTML = "";
-
-  data.forEach(todo => {
-    const card = document.createElement("div");
-card.className = `todo-card ${todo.done ? "done" : ""}`;
-
-
-    card.innerHTML = `
-      <div class="todo-header">
-        <input type="checkbox" ${todo.done ? "checked" : ""}>
-        <h4>${todo.title}</h4>
-      </div>
-      <small>${todo.desc}</small><br>
-      <small>📅 ${formatDate(todo.date)}</small><br>
-      <small>⏰ ${todo.time}</small>
-
-      <div class="todo-actions">
-        <button class="edit input1">Edit</button>
-        <button class="delete input1">Hapus</button>
-      </div>
-    `;
-
-    card.querySelector("input").addEventListener("change", () => {
-      todo.done = !todo.done;
       saveData();
       renderTodos(todos);
+      clearInput();
+      alert("Note added successfully!");
     });
 
-    card.querySelector(".delete").addEventListener("click", () => {
-      todos = todos.filter(t => t.id !== todo.id);
-      saveData();
+    function clearInput() {
+      titleInput.value = "";
+      descInput.value = "";
+      dateInput.value = "";
+      timeInput.value = "";
+    }
+
+    function saveData() {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
+    function formatDate(dateStr) {
+      return new Date(dateStr).toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function renderTodos(data) {
+      todoContainer.innerHTML = "";
+
+      data.forEach(todo => {
+        const card = document.createElement("div");
+        card.className = `todo-card ${todo.done ? "done" : ""}`;
+
+        card.innerHTML = `
+          <div class="todo-header">
+            <input type="checkbox" ${todo.done ? "checked" : ""}>
+            <h4>${todo.title}</h4>
+          </div>
+          <small>${todo.desc}</small><br>
+          <small>📅 ${formatDate(todo.date)}</small><br>
+          <small>⏰ ${todo.time}</small>
+
+          <div class="todo-actions">
+            <button class="edit input1">Edit</button>
+            <button class="delete input1">Delete</button>
+          </div>
+        `;
+
+        card.querySelector("input").addEventListener("change", () => {
+          todo.done = !todo.done;
+          saveData();
+          renderTodos(todos);
+        });
+
+        card.querySelector(".delete").addEventListener("click", () => {
+          todos = todos.filter(t => t.id !== todo.id);
+          saveData();
+          renderTodos(todos);
+        });
+
+        card.querySelector(".edit").addEventListener("click", () => {
+          titleInput.value = todo.title;
+          descInput.value = todo.desc;
+          dateInput.value = todo.date;
+          timeInput.value = todo.time;
+
+          todos = todos.filter(t => t.id !== todo.id);
+          saveData();
+          renderTodos(todos);
+        });
+
+        todoContainer.appendChild(card);
+      });
+    }
+
+    filterDate.addEventListener("change", () => {
+      const filtered = todos.filter(todo => todo.date === filterDate.value);
+      renderTodos(filtered);
+    });
+
+    resetFilter.addEventListener("click", () => {
+      if (!filterDate.value) {
+        alert("Date Filter has not been used!");
+        return;
+      }
+      filterDate.value = "";
       renderTodos(todos);
+      alert("Date filter successfully reset!");
     });
 
-    card.querySelector(".edit").addEventListener("click", () => {
-      titleInput.value = todo.title;
-      descInput.value = todo.desc;
-      dateInput.value = todo.date;
-      timeInput.value = todo.time;
+    renderTodos(todos);
+  </script>
 
-      todos = todos.filter(t => t.id !== todo.id);
-      saveData();
-      renderTodos(todos);
-    });
-
-    todoContainer.appendChild(card);
-  });
-}
-
-filterDate.addEventListener("change", () => {
-  const filtered = todos.filter(todo => todo.date === filterDate.value);
-  renderTodos(filtered);
-});
-
-resetFilter.addEventListener("click", () => {
-  if (!filterDate.value) {
-    alert("Filter belum digunakan");
-    return;
-  }
-  filterDate.value = "";
-  renderTodos(todos);
-  alert("Filter tanggal berhasil direset");
-});
-
-renderTodos(todos);
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
