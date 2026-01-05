@@ -52,6 +52,50 @@
   box-shadow: none;
   transform: scale(0.9);
 }
+/* ===== MOBILE NAVBAR 1 BARIS ===== */
+@media (max-width: 576px) {
+  .navbar-custom .container {
+    padding: 0 10px;
+  }
+
+  .navbar-custom ul.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* logo */
+  .logo {
+    height: 32px;
+  }
+
+  /* menu tengah */
+  .home ul {
+    display: flex;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .home li {
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+
+  .nav-link {
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  /* tombol login */
+  .btn.login {
+    padding: 4px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
+
 
 /* Banner */
 .carousel-card {
@@ -140,31 +184,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.footer-col{
-  padding-top: 25px;
-}
-.footer-col h4 {
-  color: #ffffff;
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-}
-.footer-col ul li {
-  margin-bottom: 1px;
-}
-.footer-col ul li a {
-  color: #cfcfd3;
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.3s;
-}
-.footer-col ul li a:hover {
-  color: #ffffff;
-  text-shadow: 2px 2px 2px #0f1a37;
 }
 .logo-footer1{
   height: 75px;
