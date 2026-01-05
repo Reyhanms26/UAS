@@ -43,59 +43,41 @@
 }
 
 
-/* Banner */
+/* ===== BANNER ===== */
 .carousel-card {
   background: #253358;
   padding: 40px;
   min-height: 300px;
 }
-.btn.start{
-  background-color: #455685;
-  border-color: #253358;
-  border-radius: 8px;
-  padding: 5px 10px;
-  font-weight: 500;
-  margin-right: -35px;
-}
-.btn.start:hover {
-  background-color: #0f1a37;
-  border-color: #1e2a4a;
-  box-shadow: 2px 2px 2px #788eca;
-}
-.text-carousel{
+
+/* TEXT */
+.text-carousel {
   margin-left: 20px;
 }
-/* ================= MOBILE FIX ================= */
+
+/* IMAGE */
+.carousel-img {
+  max-height: 220px;
+}
+
+/* ===== MOBILE FIX (INI YANG TADI GA NGARUH) ===== */
 @media (max-width: 767px) {
 
   .carousel-card {
     padding: 24px;
     min-height: auto;
-    text-align: center;
-  }
-
-  .carousel-card .row {
-    flex-direction: column-reverse;
-    gap: 16px;
   }
 
   .text-carousel {
     margin-left: 0;
   }
 
-  .text-carousel h5 {
-    font-size: 1.1rem;
-  }
-
-  .text-carousel p {
-    font-size: 0.9rem;
-  }
-
-  .carousel-card img {
+  .carousel-img {
     max-height: 160px;
   }
 
 }
+
 
 
 /* MASCOT */
