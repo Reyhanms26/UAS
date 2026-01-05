@@ -83,6 +83,59 @@
         .card:hover .card-back {
         transform: translateX(0);
         }
+        /* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+
+  .ceo {
+    flex-direction: column;
+    padding: 120px 16px 0;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ceo2 {
+    align-items: center;
+  }
+
+  .ceo h1 {
+    font-size: 32px !important;
+    line-height: 1.2;
+  }
+
+  .see {
+    font-size: 14px;
+    max-width: 320px;
+  }
+
+  /* CARD */
+  .card {
+    max-width: 220px;
+    aspect-ratio: 190 / 254;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .card-back {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 768px) {
+  .card:active .card-front {
+    transform: translateX(-100%);
+  }
+
+  .card:active .card-back {
+    transform: translateX(0);
+  }
+}
+
 
           * {
   margin: 0;
@@ -384,7 +437,7 @@ body {
             <div class="card-front">
                 <img class="foto" src="media/fotodiri.png" alt="fotodiri">
                 <p class="title">Reyhan <br> Misbahussuduri</p>
-                <p class="subtitle">Web Dev</p>
+                <p class="subtitle">Front End</p>
             </div>
             <div class="card-back">
                 <p>"By using simple elements such as sections, sub-tasks, and flexible views, we can easily track progress and adapt our projects on the fly."</p>
@@ -487,6 +540,7 @@ body {
         setTimeout(() => bubble.style.display = "none", 3500);
         });
     </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
