@@ -65,6 +65,38 @@
 .text-carousel{
   margin-left: 20px;
 }
+/* ================= MOBILE FIX ================= */
+@media (max-width: 767px) {
+
+  .carousel-card {
+    padding: 24px;
+    min-height: auto;
+    text-align: center;
+  }
+
+  .carousel-card .row {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+
+  .text-carousel {
+    margin-left: 0;
+  }
+
+  .text-carousel h5 {
+    font-size: 1.1rem;
+  }
+
+  .text-carousel p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-card img {
+    max-height: 160px;
+  }
+
+}
+
 
 /* MASCOT */
 .mascot-container {
@@ -108,7 +140,6 @@
   margin-top: 55px;
   margin-bottom: 45px;
   font-size: 50px;
-  font-family: 'Courier New', Courier, monospace;
   font-style: italic;
   font-weight: bold;
 }
